@@ -1,5 +1,6 @@
 package model;
 
+import java.io.*;
 import java.util.Scanner;
 
 public class ColorCalculator {
@@ -110,6 +111,71 @@ public class ColorCalculator {
   private String gh(int i) {
     String hexDigits = "0123456789ABCDEF";
     return "" + hexDigits.charAt(i / 16) + hexDigits.charAt(i % 16);
+  }
+
+  public void saveToFile(String red, String green, String blue)
+  {
+    try
+    {
+      FileWriter input = new FileWriter("color.dat");
+      BufferedWriter writer = new BufferedWriter(input);
+      writer.write("Color File Format 1.0");
+      writer.newLine();
+      writer.write(red);
+      writer.newLine();
+      writer.write(green);
+      writer.newLine();
+      writer.write(blue);
+      writer.close();
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found!");
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  public void loadFromFile()
+  {
+    String s;
+    int count = 0;
+
+    try {
+      FileReader output = new FileReader("color.dat");
+      BufferedReader reader = new BufferedReader(output);
+      while ((s = reader.readLine()) != null)
+      {
+        if (count == 0)
+        {
+          if (!s.equals("Color File Format 1.0"))
+            break;
+        }
+        if(count == 1)
+        {
+          changeColorViaAbsoluteValue(ColorCode.RED,s);
+        }
+        if(count == 2)
+        {
+          changeColorViaAbsoluteValue(ColorCode.GREEN,s);
+        }
+        if(count == 3)
+        {
+          changeColorViaAbsoluteValue(ColorCode.BLUE,s);
+          break;
+        }
+        count++;
+      }
+
+      reader.close();
+      output.close();
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
   }
   
   /////////////////////////////////////////////////////////////

@@ -130,68 +130,17 @@ public class ColorCalculatorC implements Initializable {
   }
 
   @FXML
-  private void load() {
-    String s;
-    int count = 0;
-
-    try {
-      FileReader output = new FileReader("Data.txt");
-      BufferedReader reader = new BufferedReader(output);
-      while ((s = reader.readLine()) != null)
-      {
-        if(count == 1)
-        {
-          model.changeColorViaAbsoluteValue(ColorCode.RED,s);
-        }
-        if(count == 2)
-        {
-          model.changeColorViaAbsoluteValue(ColorCode.GREEN,s);
-        }
-        if(count == 3)
-        {
-          model.changeColorViaAbsoluteValue(ColorCode.BLUE,s);
-          break;
-        }
-        count++;
-      }
-
-      reader.close();
-      output.close();
-    }
-    catch (FileNotFoundException e)
-    {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+  private void load()
+  {
+    model.loadFromFile();
     update(true);
   }
 
     @FXML
   private void save()
-  {
-    try
     {
-      FileWriter input = new FileWriter("Data.txt");
-      BufferedWriter writer = new BufferedWriter(input);
-      writer.write("Color File Format 1.0");
-      writer.newLine();
-      writer.write(txtRed.getText());
-      writer.newLine();
-      writer.write(txtGreen.getText());
-      writer.newLine();
-      writer.write(txtBlue.getText());
-      writer.close();
+      model.saveToFile(txtRed.getText(),txtGreen.getText(),txtBlue.getText());
     }
-    catch (FileNotFoundException e)
-    {
-      System.out.println("File not found!");
-    }
-    catch (IOException e)
-    {
-      e.printStackTrace();
-    }
-  }
 }
 
 
