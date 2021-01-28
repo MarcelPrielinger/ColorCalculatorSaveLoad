@@ -38,7 +38,7 @@
         <TextField fx:id="txtRed" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0" GridPane.rowIndex="1" />
         <TextField fx:id="txtBlue" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0" GridPane.rowIndex="5" />
         <Button fx:id="btnColor" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="223.0" mnemonicParsing="false" prefWidth="224.0" GridPane.columnIndex="2" GridPane.rowSpan="3" />
-      <Button fx:id="btn_load" mnemonicParsing="false" prefHeight="68.0" prefWidth="171.0" text="Load" GridPane.columnIndex="4" />
-      <Button fx:id="btn_save" mnemonicParsing="false" prefHeight="67.0" prefWidth="171.0" text="Save" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+      <Button mnemonicParsing="false" onAction="#load" prefHeight="68.0" prefWidth="171.0" text="Load" GridPane.columnIndex="4" />
+      <Button mnemonicParsing="false" onAction="#save" prefHeight="67.0" prefWidth="171.0" text="Save" GridPane.columnIndex="4" GridPane.rowIndex="1" />
     </children>
 </GridPane>

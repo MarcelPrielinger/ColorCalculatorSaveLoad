@@ -12,8 +12,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.ColorCalculator;
 import model.ColorCode;
-
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -129,8 +128,70 @@ public class ColorCalculatorC implements Initializable {
     this.btnColor.setStyle("-fx-background-color: rgb(" + r + "," + g + ", " + b + ");");
     this.lblColor.setText("Hex: " + model.getHex());
   }
-  
-  
+
+  @FXML
+  private void load() {
+    String s;
+    int count = 0;
+
+    try {
+      FileReader output = new FileReader("Data.txt");
+      BufferedReader reader = new BufferedReader(output);
+      while ((s = reader.readLine()) != null)
+      {
+        if(count == 1)
+        {
+          model.changeColorViaAbsoluteValue(ColorCode.RED,s);
+        }
+        if(count == 2)
+        {
+          model.changeColorViaAbsoluteValue(ColorCode.GREEN,s);
+        }
+        if(count == 3)
+        {
+          model.changeColorViaAbsoluteValue(ColorCode.BLUE,s);
+          break;
+        }
+        count++;
+      }
+
+      reader.close();
+      output.close();
+    }
+    catch (FileNotFoundException e)
+    {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    update(true);
+  }
+
+    @FXML
+  private void save()
+  {
+    try
+    {
+      FileWriter input = new FileWriter("Data.txt");
+      BufferedWriter writer = new BufferedWriter(input);
+      writer.write("Color File Format 1.0");
+      writer.newLine();
+      writer.write(txtRed.getText());
+      writer.newLine();
+      writer.write(txtGreen.getText());
+      writer.newLine();
+      writer.write(txtBlue.getText());
+      writer.close();
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found!");
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+  }
 }
 
 

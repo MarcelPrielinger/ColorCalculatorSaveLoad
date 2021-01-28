@@ -1,0 +1,4 @@
+Color File Format 1.0
+110
+236
+0
